@@ -20,6 +20,7 @@ class VoyagesController extends AbstractController{
      */
     private $repository; 
     
+    
     function __construct(VisiteRepository $repository) {
         $this->repository = $repository;
     }
