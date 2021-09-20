@@ -1,5 +1,45 @@
 {% extends "basefront.html.twig" %}
 {% block body %}
-<h1>Page des voyages</h1>
-<a href="{{ path('accueil') }}">accueil</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-left" scope="col">
+                    Ville
+                    <a href="{{ path('voyages.sort', {champ:'ville', ordre:'ASC'}) }}" class="btn btn-primay btn-sm active" role="button" aria-pressed="true"><</a>
+                    <a href="#" class="btn btn-primay btn-sm active" role="button" aria-pressed="true">></a>
+                    <form class="form-inline mt-1" method="POST" action="{{ path('voyages.findallequal', {champ:'ville'}) }}">
+                        <div class="form-group mr-1 mb-2">
+                            <input type="text" class="sm" name="recherche">
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2 btn-sm">filtrer</button>
+                    </form>
+                    
+                </th>
+                <th class="text-left" scope="col">Pays</th>
+                <th class="text-left" scope="col">Note</th>
+                <th class="text-left" scope="col">Date</th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>   
+            {% for visite in visites %}
+                <tr>
+                    <td>
+                        <h5 class="text-primary">
+                            <a href="{{ path('voyages.showone', {id:visite.id}) }}">{{ visite.ville }}</a>
+                        </h5>
+                    </td>
+                    <td>
+                        {{ visite.pays }}
+                    </td>
+                    <td class="text-right">
+                        <strong>{{ visite.note }}/20</strong>
+                    </td>
+                    <td class="text-center">
+                        {{ visite.datecreationstring }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
 {% endblock %}
